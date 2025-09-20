@@ -16,17 +16,17 @@ body {
 
 header {
   text-align: center;
-  padding: 2rem;
+  padding: 1.5rem;
 }
 
 header h1 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 600;
 }
 
 header p {
   opacity: 0.8;
-  margin-top: 0.5rem;
+  margin-top: 0.3rem;
 }
 
 #toggleMode {
@@ -41,20 +41,20 @@ header p {
 
 main {
   flex: 1;
-  width: 90%;
+  width: 95%;
   max-width: 800px;
   margin: auto;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.2rem;
 }
 
 .card {
-  background: rgba(255,255,255,0.1);
-  padding: 1.5rem;
+  background: rgba(255,255,255,0.12);
+  padding: 1rem;
   border-radius: 15px;
   backdrop-filter: blur(10px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
 }
 
 .card h2 {
@@ -66,8 +66,9 @@ textarea, input[type="date"], input[type="text"] {
   padding: 0.8rem;
   border-radius: 8px;
   border: none;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
   outline: none;
+  font-size: 1rem;
 }
 
 button {
@@ -75,7 +76,7 @@ button {
   color: #333;
   font-weight: 600;
   border: none;
-  padding: 0.8rem 1.2rem;
+  padding: 0.6rem 1rem;
   border-radius: 8px;
   cursor: pointer;
   transition: transform 0.2s;
@@ -92,9 +93,23 @@ ul {
 
 ul li {
   padding: 0.8rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
   background: rgba(255,255,255,0.2);
   border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+ul li span {
+  flex: 1;
+  margin-right: 0.5rem;
+}
+
+ul li .actions button {
+  margin-left: 0.3rem;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.9rem;
 }
 
 footer {
