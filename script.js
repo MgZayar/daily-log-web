@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Dark Mode toggle
   toggleMode.addEventListener("click", () => {
-    document.body.classList.toggle("dark");
+    document.documentElement.classList.toggle("dark");
   });
 
   // Initial load
