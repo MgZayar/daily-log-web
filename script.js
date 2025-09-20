@@ -1,14 +1,20 @@
 const entriesList=document.getElementById("entries");
 let logs=JSON.parse(localStorage.getItem("logs"))||[];
 
+// Restore permanent background
+window.addEventListener("load", () => {
+  const bgData = localStorage.getItem("bgImage");
+  if(bgData){
+    document.body.style.background = `url('${bgData}') no-repeat center center fixed`;
+    document.body.style.backgroundSize = "cover";
+  }
+});
+
 function addLog(){
   const note = document.getElementById("noteInput").value.trim();
   if(!note) return alert("Enter note!");
 
-  // Date input value
   let date = document.getElementById("dateInput").value;
-  
-  // Date မရွေးထားလျှင် system date auto assign
   if(!date){
     const today = new Date();
     const yyyy = today.getFullYear();
@@ -17,7 +23,6 @@ function addLog(){
     date = `${yyyy}-${mm}-${dd}`;
   }
 
-  // Log push & save
   logs.push({date, note});
   localStorage.setItem("logs", JSON.stringify(logs));
   renderLogs();
@@ -68,8 +73,12 @@ function uploadBackground(){
   if(fileInput.files && fileInput.files[0]){
     const reader=new FileReader();
     reader.onload=function(e){
-      document.body.style.background=`url('${e.target.result}') no-repeat center center fixed`;
+      const imgData = e.target.result;
+      document.body.style.background=`url('${imgData}') no-repeat center center fixed`;
       document.body.style.backgroundSize="cover";
+      
+      // Save to LocalStorage for permanent background
+      localStorage.setItem("bgImage", imgData);
     }
     reader.readAsDataURL(fileInput.files[0]);
   }
