@@ -2,12 +2,25 @@ const entriesList=document.getElementById("entries");
 let logs=JSON.parse(localStorage.getItem("logs"))||[];
 
 function addLog(){
-  const date=document.getElementById("dateInput").value;
+  let date=document.getElementById("dateInput").value;
   const note=document.getElementById("noteInput").value.trim();
-  if(!date||!note)return alert("Enter date & note!");
+  
+  // Date default to today if not selected
+  if(!date){
+    const today=new Date();
+    const yyyy=today.getFullYear();
+    const mm=String(today.getMonth()+1).padStart(2,'0');
+    const dd=String(today.getDate()).padStart(2,'0');
+    date=`${yyyy}-${mm}-${dd}`;
+  }
+
+  if(!note) return alert("Enter note!");
+  
   logs.push({date,note});
   localStorage.setItem("logs",JSON.stringify(logs));
   renderLogs();
+
+  // Note cleared, date unchanged
   document.getElementById("noteInput").value="";
 }
 
@@ -34,7 +47,7 @@ function deleteLog(index){
 
 function editLog(index){
   const newNote=prompt("Edit your note:",logs[index].note);
-  if(newNote!==null&&newNote.trim()!==""){
+  if(newNote!==null && newNote.trim()!==""){
     logs[index].note=newNote.trim();
     localStorage.setItem("logs",JSON.stringify(logs));
     renderLogs();
