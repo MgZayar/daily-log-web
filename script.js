@@ -14,7 +14,6 @@ const firebaseConfig = {
   measurementId: "G-EPY3E1P0Y3"
 };
 
-// DOM loaded
 document.addEventListener("DOMContentLoaded", () => {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
@@ -25,12 +24,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const entriesList = document.getElementById("entries");
   const toggleMode = document.getElementById("toggleMode");
 
-  // Default date
   function getTodayDate() {
     return new Date().toISOString().split("T")[0];
   }
 
-  // Load entries
   async function loadEntries() {
     entriesList.innerHTML = "";
     const querySnapshot = await getDocs(collection(db, "entries"));
@@ -49,13 +46,11 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       `;
 
-      // Delete
       li.querySelector(".delete-btn").addEventListener("click", async () => {
         await deleteDoc(doc(db, "entries", docSnap.id));
         loadEntries();
       });
 
-      // Edit
       li.querySelector(".edit-btn").addEventListener("click", async () => {
         const newText = prompt("Edit your entry:", entry.text);
         if (newText !== null && newText.trim() !== "") {
@@ -68,12 +63,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Save Entry
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const dateValue = dateInput.value || getTodayDate();
     const textValue = textInput.value.trim();
-
     if (!textValue) {
       alert("Please write something!");
       return;
@@ -89,11 +82,9 @@ document.addEventListener("DOMContentLoaded", () => {
     loadEntries();
   });
 
-  // Dark Mode toggle
   toggleMode.addEventListener("click", () => {
     document.documentElement.classList.toggle("dark");
   });
 
-  // Initial load
   loadEntries();
 });
