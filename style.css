@@ -1,133 +1,109 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #4facfe, #00f2fe);
-  min-height: 100vh;
-  transition: background 0.3s, color 0.3s;
-}
-
-/* Navbar */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.2);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-.navbar .logo {
-  font-size: 1.3rem;
-  font-weight: bold;
-}
-.nav-links {
-  display: flex;
-  gap: 1rem;
-  list-style: none;
-}
-.nav-links a,
-.nav-links button {
-  text-decoration: none;
-  background: none;
-  border: none;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-/* Hero Section */
-.hero {
-  text-align: center;
-  padding: 3rem 1rem;
-  color: white;
-}
-.hero h1 {
-  font-size: 2.5rem;
-}
-
-/* Card (Glassmorphism) */
-.card {
-  max-width: 800px;
-  margin: 1.5rem auto;
-  padding: 2rem;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(20px);
+  background: linear-gradient(135deg, #74ABE2, #5563DE);
   color: #fff;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  animation: fadeIn 1s ease;
+  transition: background 0.5s, color 0.5s;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
-.card input,
-.card textarea,
-.card button {
+
+header {
+  text-align: center;
+  padding: 2rem;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+header p {
+  opacity: 0.8;
+  margin-top: 0.5rem;
+}
+
+#toggleMode {
+  margin-top: 1rem;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #fff;
+}
+
+main {
+  flex: 1;
+  width: 90%;
+  max-width: 800px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.card {
+  background: rgba(255,255,255,0.1);
+  padding: 1.5rem;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.card h2 {
+  margin-bottom: 1rem;
+}
+
+textarea, input[type="date"], input[type="text"] {
   width: 100%;
-  margin: 0.5rem 0;
   padding: 0.8rem;
-  border-radius: 10px;
+  border-radius: 8px;
   border: none;
-}
-.card button {
-  background: #4facfe;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.card button:hover {
-  background: #00c6ff;
+  margin-bottom: 1rem;
+  outline: none;
 }
 
-/* Entries */
-#entries li {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 1rem;
-  margin: 0.5rem 0;
-  border-radius: 10px;
-  border-left: 5px solid #4facfe;
-}
-
-/* Floating Add Button */
-.fab {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #4facfe;
+button {
+  background: #fff;
+  color: #333;
+  font-weight: 600;
   border: none;
-  padding: 1rem 1.2rem;
-  border-radius: 50%;
-  color: white;
-  font-size: 1.2rem;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
   cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  transition: transform 0.2s;
 }
 
-/* Footer */
+button:hover {
+  transform: scale(1.05);
+}
+
+ul {
+  list-style: none;
+  margin-top: 1rem;
+}
+
+ul li {
+  padding: 0.8rem;
+  margin-bottom: 0.5rem;
+  background: rgba(255,255,255,0.2);
+  border-radius: 8px;
+}
+
 footer {
   text-align: center;
   padding: 1rem;
-  color: white;
+  opacity: 0.7;
 }
 
-/* Dark Mode */
 body.dark {
   background: #121212;
   color: #eee;
-}
-body.dark .card {
-  background: rgba(30, 30, 30, 0.8);
-}
-
-/* Animation */
-@keyframes fadeIn {
-  from {opacity: 0; transform: translateY(20px);}
-  to {opacity: 1; transform: translateY(0);}
 }
