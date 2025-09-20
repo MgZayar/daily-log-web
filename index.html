@@ -1,43 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Daily Log</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
-  <header>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">🌍 Daily Log</div>
+    <ul class="nav-links">
+      <li><a href="#log-form">Add Entry</a></li>
+      <li><a href="#log-list">My Entries</a></li>
+      <li><a href="#export">Export</a></li>
+      <li><button id="toggleMode"><i class="fa-solid fa-moon"></i></button></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
     <h1>📝 My Daily Log</h1>
     <p>Track your journey, one day at a time</p>
-    <button id="toggleMode">🌙 Dark Mode</button>
   </header>
 
+  <!-- Main Content -->
   <main>
-    <section id="log-form">
-      <h2>Add New Entry</h2>
-      <input type="date" id="dateInput">
+    <section id="log-form" class="card animate">
+      <h2><i class="fa-solid fa-plus"></i> Add New Entry</h2>
+      <input type="date" id="dateInput" />
       <textarea id="noteInput" placeholder="What happened today?"></textarea>
-      <button onclick="addLog()">Save Entry</button>
+      <button onclick="addLog()"><i class="fa-solid fa-save"></i> Save Entry</button>
     </section>
 
-    <section id="search-box">
-      <input type="text" id="searchInput" placeholder="Search logs..." onkeyup="searchLogs()">
+    <section id="search-box" class="card animate">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="🔍 Search logs..."
+        onkeyup="searchLogs()"
+      />
     </section>
 
-    <section id="log-list">
-      <h2>My Entries</h2>
+    <section id="log-list" class="card animate">
+      <h2><i class="fa-solid fa-list"></i> My Entries</h2>
       <ul id="entries"></ul>
     </section>
 
-    <section id="export">
-      <button onclick="exportTXT()">⬇ Export TXT</button>
-      <button onclick="exportPDF()">⬇ Export PDF</button>
+    <section id="export" class="card animate">
+      <button onclick="exportTXT()"><i class="fa-solid fa-file-lines"></i> Export TXT</button>
+      <button onclick="exportPDF()"><i class="fa-solid fa-file-pdf"></i> Export PDF</button>
     </section>
   </main>
 
+  <!-- Floating Add Button (Mobile) -->
+  <button class="fab" onclick="document.getElementById('noteInput').focus()">
+    <i class="fa-solid fa-pen"></i>
+  </button>
+
+  <!-- Footer -->
   <footer>
-    <p>© 2025 Burmese Guy – Powered by GitHub Pages</p>
+    <p>© 2025 Burmese Guy – Built with ❤️ & GitHub Pages</p>
   </footer>
 
   <script src="script.js"></script>
