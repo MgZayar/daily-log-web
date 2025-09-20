@@ -2,26 +2,28 @@ const entriesList=document.getElementById("entries");
 let logs=JSON.parse(localStorage.getItem("logs"))||[];
 
 function addLog(){
-  let date=document.getElementById("dateInput").value;
-  const note=document.getElementById("noteInput").value.trim();
+  const note = document.getElementById("noteInput").value.trim();
+  if(!note) return alert("Enter note!");
+
+  // Date input value
+  let date = document.getElementById("dateInput").value;
   
-  // Date default to today if not selected
+  // Date မရွေးထားလျှင် system date auto assign
   if(!date){
-    const today=new Date();
-    const yyyy=today.getFullYear();
-    const mm=String(today.getMonth()+1).padStart(2,'0');
-    const dd=String(today.getDate()).padStart(2,'0');
-    date=`${yyyy}-${mm}-${dd}`;
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2,'0');
+    const dd = String(today.getDate()).padStart(2,'0');
+    date = `${yyyy}-${mm}-${dd}`;
   }
 
-  if(!note) return alert("Enter note!");
-  
-  logs.push({date,note});
-  localStorage.setItem("logs",JSON.stringify(logs));
+  // Log push & save
+  logs.push({date, note});
+  localStorage.setItem("logs", JSON.stringify(logs));
   renderLogs();
 
-  // Note cleared, date unchanged
-  document.getElementById("noteInput").value="";
+  // Note cleared, date input unchanged
+  document.getElementById("noteInput").value = "";
 }
 
 function renderLogs(filter=""){
