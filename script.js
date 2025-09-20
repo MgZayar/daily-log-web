@@ -3,7 +3,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebas
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc } 
   from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
-// Firebase Config (မင်း Firebase မှာရယူထားတာ)
+// Firebase Config
 const firebaseConfig = {
   apiKey: "AIzaSyD68lKJtGSN_EKFidP5rkGRhykNr5BMy5E",
   authDomain: "daily-log-web.firebaseapp.com",
