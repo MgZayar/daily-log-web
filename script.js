@@ -3,7 +3,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebas
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc } 
   from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
-// Firebase Config (မင်းရဲ့ Firebase Project က နေရာမှ ကူးထည့်ထားတာ)
+// Firebase Config (မင်း Firebase မှာရယူထားတာ)
 const firebaseConfig = {
   apiKey: "AIzaSyD68lKJtGSN_EKFidP5rkGRhykNr5BMy5E",
   authDomain: "daily-log-web.firebaseapp.com",
@@ -14,86 +14,86 @@ const firebaseConfig = {
   measurementId: "G-EPY3E1P0Y3"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+// DOM loaded
+document.addEventListener("DOMContentLoaded", () => {
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
 
-// Elements
-const form = document.getElementById("entry-form");
-const dateInput = document.getElementById("date");
-const textInput = document.getElementById("entry");
-const entriesList = document.getElementById("entries");
-const toggleMode = document.getElementById("toggleMode");
+  const form = document.getElementById("entry-form");
+  const dateInput = document.getElementById("date");
+  const textInput = document.getElementById("entry");
+  const entriesList = document.getElementById("entries");
+  const toggleMode = document.getElementById("toggleMode");
 
-// Default date = Today
-function getTodayDate() {
-  const today = new Date();
-  return today.toISOString().split("T")[0];
-}
-
-// Load Entries from Firestore
-async function loadEntries() {
-  entriesList.innerHTML = "";
-  const querySnapshot = await getDocs(collection(db, "entries"));
-  querySnapshot.forEach((docSnap) => {
-    const entry = docSnap.data();
-    const li = document.createElement("li");
-    li.className = "p-3 bg-white dark:bg-gray-700 rounded-lg shadow flex justify-between items-center";
-    li.innerHTML = `
-      <div>
-        <strong>${entry.date}</strong>
-        <p>${entry.text}</p>
-      </div>
-      <div class="flex gap-2">
-        <button class="edit-btn bg-blue-500 text-white px-3 py-1 rounded">Edit</button>
-        <button class="delete-btn bg-red-500 text-white px-3 py-1 rounded">Delete</button>
-      </div>
-    `;
-
-    // Delete
-    li.querySelector(".delete-btn").addEventListener("click", async () => {
-      await deleteDoc(doc(db, "entries", docSnap.id));
-      loadEntries();
-    });
-
-    // Edit
-    li.querySelector(".edit-btn").addEventListener("click", async () => {
-      const newText = prompt("Edit your entry:", entry.text);
-      if (newText !== null && newText.trim() !== "") {
-        await updateDoc(doc(db, "entries", docSnap.id), { text: newText });
-        loadEntries();
-      }
-    });
-
-    entriesList.appendChild(li);
-  });
-}
-
-// Save Entry
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const dateValue = dateInput.value || getTodayDate();
-  const textValue = textInput.value.trim();
-
-  if (!textValue) {
-    alert("Please write something!");
-    return;
+  // Default date
+  function getTodayDate() {
+    return new Date().toISOString().split("T")[0];
   }
 
-  await addDoc(collection(db, "entries"), {
-    date: dateValue,
-    text: textValue
+  // Load entries
+  async function loadEntries() {
+    entriesList.innerHTML = "";
+    const querySnapshot = await getDocs(collection(db, "entries"));
+    querySnapshot.forEach((docSnap) => {
+      const entry = docSnap.data();
+      const li = document.createElement("li");
+      li.className = "p-3 bg-white dark:bg-gray-700 rounded-lg shadow flex justify-between items-center";
+      li.innerHTML = `
+        <div>
+          <strong>${entry.date}</strong>
+          <p>${entry.text}</p>
+        </div>
+        <div class="flex gap-2">
+          <button class="edit-btn bg-blue-500 text-white px-3 py-1 rounded">Edit</button>
+          <button class="delete-btn bg-red-500 text-white px-3 py-1 rounded">Delete</button>
+        </div>
+      `;
+
+      // Delete
+      li.querySelector(".delete-btn").addEventListener("click", async () => {
+        await deleteDoc(doc(db, "entries", docSnap.id));
+        loadEntries();
+      });
+
+      // Edit
+      li.querySelector(".edit-btn").addEventListener("click", async () => {
+        const newText = prompt("Edit your entry:", entry.text);
+        if (newText !== null && newText.trim() !== "") {
+          await updateDoc(doc(db, "entries", docSnap.id), { text: newText });
+          loadEntries();
+        }
+      });
+
+      entriesList.appendChild(li);
+    });
+  }
+
+  // Save Entry
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const dateValue = dateInput.value || getTodayDate();
+    const textValue = textInput.value.trim();
+
+    if (!textValue) {
+      alert("Please write something!");
+      return;
+    }
+
+    await addDoc(collection(db, "entries"), {
+      date: dateValue,
+      text: textValue
+    });
+
+    textInput.value = "";
+    dateInput.value = "";
+    loadEntries();
   });
 
-  textInput.value = "";
-  dateInput.value = "";
+  // Dark Mode toggle
+  toggleMode.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+  });
+
+  // Initial load
   loadEntries();
 });
-
-// Dark Mode Toggle
-toggleMode.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-});
-
-// First Load
-loadEntries();
