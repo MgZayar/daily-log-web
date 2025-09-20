@@ -48,12 +48,6 @@ function searchLogs(){
 
 document.getElementById("toggleMode").addEventListener("click",()=>{document.body.classList.toggle("dark");});
 
-function changeBackground(){
-  const url=document.getElementById("bgURL").value.trim();
-  if(url) document.body.style.background=`url('${url}') no-repeat center center fixed`;
-  document.body.style.backgroundSize="cover";
-}
-
 function uploadBackground(){
   const fileInput=document.getElementById("bgFile");
   if(fileInput.files && fileInput.files[0]){
