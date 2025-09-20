@@ -47,8 +47,23 @@ function searchLogs(){
 }
 
 document.getElementById("toggleMode").addEventListener("click",()=>{document.body.classList.toggle("dark");});
+
 function changeBackground(){
   const url=document.getElementById("bgURL").value.trim();
   if(url) document.body.style.background=`url('${url}') no-repeat center center fixed`;
+  document.body.style.backgroundSize="cover";
 }
+
+function uploadBackground(){
+  const fileInput=document.getElementById("bgFile");
+  if(fileInput.files && fileInput.files[0]){
+    const reader=new FileReader();
+    reader.onload=function(e){
+      document.body.style.background=`url('${e.target.result}') no-repeat center center fixed`;
+      document.body.style.backgroundSize="cover";
+    }
+    reader.readAsDataURL(fileInput.files[0]);
+  }
+}
+
 renderLogs();
