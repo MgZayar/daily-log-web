@@ -3,45 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Daily Log</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <title>📝 My Daily Log</title>
+  <script defer type="module" src="script.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <header>
-    <div class="header-content">
-      <h1>📝 My Daily Log</h1>
-      <button id="toggleMode">🌙</button>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-blue-600 text-white p-4 flex justify-between items-center">
+    <div>
+      <h1 class="text-2xl font-bold">📝 My Daily Log</h1>
+      <p class="text-sm">Track your journey, one day at a time</p>
     </div>
-    <p>Track your journey, one day at a time</p>
-    <div class="bg-selector">
-      <input type="file" id="bgFile" accept="image/*"/>
-      <button onclick="uploadBackground()">Set Background</button>
-    </div>
+    <button id="toggleMode" class="bg-gray-800 px-3 py-1 rounded">🌙 Dark Mode</button>
   </header>
 
-  <main>
-    <section class="card animate">
-      <h2>Add New Entry</h2>
-      <input type="date" id="dateInput">
-      <textarea id="noteInput" placeholder="What happened today?"></textarea>
-      <button onclick="addLog()">➕ Save Entry</button>
+  <!-- Main Content -->
+  <main class="flex-1 p-4 max-w-2xl mx-auto w-full">
+    <!-- Add Entry Form -->
+    <section id="log-form" class="mb-6">
+      <h2 class="text-xl font-semibold mb-2">Add New Entry</h2>
+      <form id="entry-form" class="space-y-3">
+        <input type="date" id="date" class="w-full border p-2 rounded" />
+        <textarea id="entry" placeholder="What happened today?" class="w-full border p-2 rounded h-24"></textarea>
+        <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded">Save Entry</button>
+      </form>
     </section>
 
-    <section class="card animate">
-      <input type="text" id="searchInput" placeholder="🔍 Search logs..." onkeyup="searchLogs()">
-    </section>
-
-    <section class="card animate">
-      <h2>My Entries</h2>
-      <ul id="entries"></ul>
+    <!-- Entries List -->
+    <section id="log-list">
+      <h2 class="text-xl font-semibold mb-2">My Entries</h2>
+      <ul id="entries" class="space-y-3"></ul>
     </section>
   </main>
 
-  <footer>
-    <p>© 2025 Burmese Guy – Powered by GitHub Pages</p>
+  <!-- Footer -->
+  <footer class="bg-gray-200 dark:bg-gray-800 text-center p-3">
+    <p>© 2025 Burmese Guy – Powered by GitHub Pages & Firebase</p>
   </footer>
 
-  <script src="script.js"></script>
 </body>
 </html>
